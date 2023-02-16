@@ -31,6 +31,7 @@ exports.findAll = async (req, res, next) => {
             new ApiError(500, 'An error occurred while creating the contact')
         );
     }
+    return res.send(documents);
 };
 exports.findOne = async (req, res, next) => {
     try {
@@ -73,7 +74,12 @@ exports.delete = async (req, res, next) => {
         }
         return res.send({ message: 'Contact was deleted successfully' });
     } catch (error) {
-        new ApiError(500, `Could not delete contact with id=${req.params.id}`);
+        return next(
+            new ApiError(
+                500,
+                `Could not delete contact with id=${req.params.id}`
+            )
+        );
     }
 };
 exports.deleteAll = async (req, res, next) => {
