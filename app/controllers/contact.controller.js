@@ -62,7 +62,9 @@ exports.update = async (req, res, next) => {
         }
         return res.send({ message: 'Contact was updated successfully' });
     } catch (error) {
-        new ApiError(500, `Error updating contact with id=${req.params.id}`);
+        return next(
+            new ApiError(500, `Error updating contact with id=${req.params.id}`)
+        );
     }
 };
 exports.delete = async (req, res, next) => {
